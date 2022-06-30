@@ -4,14 +4,14 @@ const scene = new THREE.Scene();
 
 //カメラを用意する
 const camera = new THREE.PerspectiveCamera(
-  45,
+  75,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
 );
 
 //レンダリングの準備をする
-const renderer = THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -29,3 +29,13 @@ scene.add(cube);
 camera.position.z = 5;
 
 //最後に、レンダリングをして描画する
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+
+  //動きをつけていく
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
+  cube.rotation.z += 0.01;
+}
+animate();
